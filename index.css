@@ -60,7 +60,7 @@ th {
     padding: 0.4em;
 }
 
-tr:hover{
+tbody>tr:hover{
     cursor: pointer;
     background-color: rgb(196, 194, 194);
 }
@@ -91,6 +91,10 @@ tr:hover{
     font-size: larger;
 }
 
-.search>i,td>i,button{
+button, i{
     cursor: pointer;
+}
+
+.arrows>i{
+    margin:0.1em 0.2em
 }
