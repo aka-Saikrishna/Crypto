@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Website</title>
+    <link rel="stylesheet" href="/index.css">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="nav">
+            <div class="left">
+                <h2>Crypto Tracker</h2>
+            </div>
+            <div class="right">
+                <button type="button">Home</button>
+                <button type="button">Liked Coin</button>
+                <div class="search">
+                    <input type="text" placeholder="Search here.."><i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+        </nav>
+
+        <main>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Icon</th>
+                        <th>Name</th>
+                        <th>Price <i class="fa-solid fa-arrow-up"></i><i class="fa-solid fa-arrow-down"></i>
+                        </th>
+                        <th>Volume <i class="fa-solid fa-arrow-up"></i><i class="fa-solid fa-arrow-down"></i></th>
+                        <th>Market Cap <i class="fa-solid fa-arrow-up"></i><i class="fa-solid fa-arrow-down"></i></th>
+                        <th>Favorite</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+
+                </tbody>
+            </table>
+            <div class="pagination-container">
+                <button type="button" id="prev-button">Prev</button>
+                <button type="button" id="next-button">Next</button>
+            </div>
+            <div class="shimmer-container">
+                <div class="shimmer">
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://kit.fontawesome.com/17ebe4f9e1.js" crossorigin="anonymous"></script>
+    <script src="/index.js"></script>
+</body>
+
+</html>
