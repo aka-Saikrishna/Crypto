@@ -3,7 +3,9 @@
     padding: 0;
 }
 
+
 .nav {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,31 +14,31 @@
 }
 
 .left {
-    margin: 0.2em;
+    margin: 0.5em;
 }
 
 .right {
-    margin: 0.2em;
+    margin: 0.5em;
     display: flex;
     justify-content: space-around;
 }
 
 .right button {
     margin: 0.5em;
-    padding: 0.4em;
+    padding: 0.6em;
     border-radius: 0.5em;
     border: 0;
 }
 
-.right input {
+.search-cointainer input {
     border-radius: 0.5em;
     margin: 0.5em;
-    padding: 0.4em;
+    padding: 0.6em;
     border: 0;
     outline: 0;
 }
 
-.search {
+.search-cointainer {
     margin-right: 0.5em;
 }
 
@@ -60,7 +62,7 @@ th {
     padding: 0.4em;
 }
 
-tbody>tr:hover{
+tbody>tr:hover {
     cursor: pointer;
     background-color: rgb(196, 194, 194);
 }
@@ -75,26 +77,141 @@ tbody>tr:hover{
     border: 0;
 }
 
-#prev-button,#next-button{
+#prev-button,
+#next-button {
     padding: 0.4em;
     margin: 0 0.4em;
     border-radius: 5px;
     border: 1px solid;
 }
 
-#img{
+#img {
     width: 23px;
 }
 
-.fa-regular{
-    color:red ;
+.fa-regular {
+    color: red;
     font-size: larger;
 }
 
-button, i{
+button,
+i {
     cursor: pointer;
 }
 
-.arrows>i{
-    margin:0.1em 0.2em
+.arrows>i {
+    margin: 0.1em 0.2em
+}
+
+.search-cointainer {
+    position: relative;
+}
+
+.dialog-box {
+    display: none;
+    position: absolute;
+    right: 80%;
+    color: black;
+    background-color: rgb(222, 218, 218);
+    border-radius: 10px;
+    max-height: 400px;
+    min-width: 250px;
+    overflow-y: auto;
+}
+
+.close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.close i {
+    padding: 0.5em;
+    border-radius: 40% 40%;
+    margin-top: 0.5em;
+}
+
+.close i:hover {
+    background-color: rgb(187, 186, 186);
+}
+
+.dialog-box ul {
+    list-style: none;
+    padding: 0.5em;
+    margin-bottom: 0.3em;
+    text-transform: capitalize;
+}
+
+.dialog-box ul li {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+    /* margin-right: 1em; */
+    border-radius: 10px;
+    padding: 0.5em;
+    cursor: pointer;
+    outline: 1px solid grey;
+    margin-top: 0.3em;
+}
+
+.dialog-box ul li:hover {
+    background-color: rgb(187, 186, 186);
+}
+
+.dialog-box ul li img {
+    margin-right: 1em;
+}
+
+@media screen and (width < 577px) {
+    .nav {
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+    }
+
+    .dialog-box {
+        font-size: 0.9em;
+        min-width: 150px;
+        max-height: 300px;
+        /* right:40%; */
+    }
+
+    table {
+        font-size: 0.8em;
+    }
+}
+
+@media screen and (width < 460px) {
+    .right {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    table {
+        font-size: 0.5em;
+    }
+
+    .dialog-box {
+        font-size: 0.6em;
+        min-width: 150px;
+        max-height: 300px;
+        right:30%;
+    }
+    td,th{
+        padding: 0.1em;
+    }
+    .img{
+        width: 12px;
+    }
+    .nav,.right button,#search{
+        font-size: 0.8em;
+    }
 }

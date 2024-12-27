@@ -1,11 +1,25 @@
 const tbody = document.getElementById("tbody");
-let coins = [];
-let page = 1;
-let nextbtn = document.querySelector("#next-button");
-let prevbtn = document.querySelector("#prev-button");
+const nextbtn = document.querySelector("#next-button");
+const prevbtn = document.querySelector("#prev-button");
+const priceDownArr = document.querySelector("#price-down");
+const priceUpArr = document.querySelector("#price-up");
+const volumeDownArr = document.querySelector("#vol-down");
+const volumeUpArr = document.querySelector("#vol-up");
+const marketDownArr = document.querySelector("#market-down");
+const marketUpArr = document.querySelector("#market-up");
+const dialog = document.querySelector(".dialog-box");
+const input = document.querySelector("#search");
+const ul = document.createElement("ul");
+const xmark = document.querySelector("#xmark");
+const searchIcon = document.querySelector(".fa-magnifying-glass");
 
-function renderCoins(data, page, itemsPerPage=25) {
-    const start = (page - 1) * itemsPerPage + 1;
+let coins = [];
+let priceList = [];
+let page = 1;
+let data;
+
+function renderCoins(data, page, itemsPerPage = 25) {
+  const start = (page - 1) * itemsPerPage + 1;
   tbody.innerHTML = "";
 
   data.forEach((coin, index) => {
@@ -28,8 +42,8 @@ function renderCoins(data, page, itemsPerPage=25) {
 }
 
 function updatePaginationControls() {
-    document.querySelector("#next-button").disabled = coins.length < 25;
-    document.querySelector("#prev-button").disabled = page === 1;
+  document.querySelector("#next-button").disabled = coins.length < 25;
+  document.querySelector("#prev-button").disabled = page === 1;
 }
 
 async function tableBody(page = 1) {
@@ -54,31 +68,138 @@ async function tableBody(page = 1) {
   }
 }
 
-const initialize = async ()=>{
-    await tableBody(page);
-    renderCoins(coins, page);
-    updatePaginationControls();
-}
+const initialize = async () => {
+  await tableBody(page);
+  renderCoins(coins, page);
+  updatePaginationControls();
+  fetchSearchResults();
+};
 
 async function handlePrevButton() {
-    if (page > 1) {
-        page--;
-    }
-    await tableBody(page);
-    renderCoins(coins, page);
-    updatePaginationControls();
-}
-
-async function handleNextButton() {
-    page++;
+  if (page > 1) {
+    page--;
+  }
   await tableBody(page);
   renderCoins(coins, page);
   updatePaginationControls();
 }
 
+async function handleNextButton() {
+  page++;
+  await tableBody(page);
+  renderCoins(coins, page);
+  updatePaginationControls();
+}
+
+function fieldSort(field, order) {
+  coins.sort((a, b) =>
+    order == "asc" ? a[field] - b[field] : b[field] - a[field]
+  );
+  renderCoins(coins, page);
+}
+
+function debounce(func, delay) {
+  let timer;
+  return function (...args) {
+    const context = this;
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(context, args);
+    }, delay);
+  };
+}
+
+function fetchSearchResults() {
+  const xml = new XMLHttpRequest();
+  try {
+    xml.open("get", "https://api.coingecko.com/api/v3/search?query=bit", true);
+    xml.send();
+    xml.onload = function () {
+      data = JSON.parse(xml.responseText).coins;
+      console.log(data);
+    };
+    xml.onerror = function () {
+      throw new Error("Data can't be fetch");
+    };
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+function dialogBox(data1) {
+  dialog.style.display = "block";
+  ul.innerHTML = "";
+  ul.style.textAlign = "left";
+  const inputText = input.value.trim().toLowerCase();
+  let requiredCoins = data1.filter((coin) =>
+    coin.name.trim().toLowerCase().includes(inputText)
+  );
+  if (inputText == "") {
+    ul.innerHTML = `Type to search`;
+    ul.style.textAlign = "center";
+    requiredCoins = [];
+  } else if (requiredCoins.length < 1) {
+    ul.style.textAlign = "center";
+    ul.innerHTML = `Can't Find The Coin Your Looking For`;
+  }
+  dialog.style.overflow = "auto";
+  requiredCoins.forEach((selectedCoins) => {
+    const li = document.createElement("li");
+      li.innerHTML = `
+            <img src="${selectedCoins.thumb}" alt="${selectedCoins.name}" class="img"> ${selectedCoins.name}
+            `;
+    ul.appendChild(li);
+  });
+  dialog.appendChild(ul);
+};
+
+// function searchIconBox(data2) {
+//     dialog.style.display = "block";
+//     ul.innerHTML = "";
+//     dialog.style.overflow = "auto";
+//     console.log(data2);
+//     data2.forEach((selectedCoins) => {
+//       const li = document.createElement("li");
+//       li.innerHTML = `
+//             <img src="${selectedCoins.thumb}" alt="${selectedCoins.name}" class="img"> ${selectedCoins.name}
+//             `;
+//       ul.appendChild(li);
+//     });
+//     dialog.appendChild(ul);
+// }
+dialog.addEventListener("click", (event) => {
+  event.stopPropagation();
+});
+
 document.addEventListener("DOMContentLoaded", initialize);
 prevbtn.addEventListener("click", handlePrevButton);
 nextbtn.addEventListener("click", handleNextButton);
-
-
+priceDownArr.addEventListener("click", () => fieldSort("current_price", ""));
+priceUpArr.addEventListener("click", () => fieldSort("current_price", "asc"));
+volumeDownArr.addEventListener("click", () => fieldSort("total_volume", ""));
+volumeUpArr.addEventListener("click", () => fieldSort("total_volume", "asc"));
+marketDownArr.addEventListener("click", () => fieldSort("market_cap", ""));
+marketUpArr.addEventListener("click", () => fieldSort("total_volume", "asc"));
+input.addEventListener(
+  "input",
+    debounce((event) => {
+        event.stopPropagation();
+        dialogBox(data)
+     }, 300)
+);
+xmark.addEventListener("click", () => {
+  dialog.style.display = "none";
+  input.value = "";
+});
+document.addEventListener("click", () => {
+  dialog.style.display = "none";
+});
+console.log(searchIcon);
+searchIcon.addEventListener(
+  "click",
+    debounce(() => {
+        dialogBox(data)
+        input.focus();
+     }, 300)
+);
 

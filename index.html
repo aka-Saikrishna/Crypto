@@ -15,10 +15,18 @@
                 <h2>Crypto Tracker</h2>
             </div>
             <div class="right">
+                <div class="btns">
                 <button type="button">Home</button>
                 <button type="button">Liked Coin</button>
-                <div class="search">
-                    <input type="text" placeholder="Search here.."><i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div class="search-cointainer">
+                    <input type="text" placeholder="Search here.." id="search" autocomplete="off">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <div class="dialog-box">
+                        <div class="close">
+                            <i class="fa-solid fa-xmark" id="xmark" title="close"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -32,20 +40,20 @@
                         <th>Name</th>
                         <th>Price 
                             <div class="arrows">
-                                <i class="fa-solid fa-arrow-up"></i>
-                                <i class="fa-solid fa-arrow-down"></i>
+                                <i class="fa-solid fa-arrow-up" id="price-up"></i>
+                                <i class="fa-solid fa-arrow-down" id="price-down"></i>
                             </div>
                         </th>
                         <th>Volume 
                             <div class="arrows">
-                                <i class="fa-solid fa-arrow-up"></i>
-                                <i class="fa-solid fa-arrow-down"></i>
+                                <i class="fa-solid fa-arrow-up" id="vol-up"></i>
+                                <i class="fa-solid fa-arrow-down" id="vol-down"></i>
                             </div>
                         </th>
                         <th>Market Cap 
                             <div class="arrows">
-                                <i class="fa-solid fa-arrow-up"></i>
-                                <i class="fa-solid fa-arrow-down"></i>
+                                <i class="fa-solid fa-arrow-up" id="market-up"></i>
+                                <i class="fa-solid fa-arrow-down" id="market-down"></i>
                             </div>
                         </th>
                         <th>Favorite</th>
