@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin</title>
+    <link rel="stylesheet" href="/coin_Interface.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="nav">
+            <div class="left">
+                <h2>Crypto Tracker</h2>
+            </div>
+            <div class="right">
+                <div class="btns">
+                    <a href="/index.html"><button type="button">Home</button></a>
+                    <a href=""><button type="button">Liked Coin</button></a>
+                </div>
+                <div class="search-cointainer">
+                    <input type="text" placeholder="Search here.." id="search" autocomplete="off">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <div class="dialog-box">
+                        <div class="close">
+                            <i class="fa-solid fa-xmark" id="xmark" title="close"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <section class="coin-description">
+            <div class="description">
+                <div class="img-des">
+                    <img src="#" alt="Coin Image" id="coin-image">
+                    <h3 class="heading" id="coin-name"></h3>
+                    <div class="about-coin">
+                    </div>
+                </div>
+                <div class="details">
+                    <div id="rank" class="coin-details">
+                        <span class="heading">Rank:</span>
+                        <span class="coin-rank"></span>
+                    </div>
+                    <div id="price" class="coin-details">
+                        <span class="heading">Price:</span>
+                        <span class="coin-price"></span>
+                    </div>
+                    <div id="market" class="coin-details">
+                        <span class="heading">Market:</span>
+                        <span class="coin-market"></span>
+                    </div>
+                </div>
+                <button type="button" id="fav-btn">Add to Favorite</button>
+            </div>
+            <div class="chart">
+                <div class="timeline">
+                    <button id="24h" type="button" class="active">24h</button>
+                    <button id="30d" type="button">30d</button>
+                    <button id="3m" type="button">3m</button>
+                </div>
+                <div class="graph">
+                    <canvas id="coin-chart"></canvas>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="https://kit.fontawesome.com/17ebe4f9e1.js" crossorigin="anonymous"></script>
+
+    <script src="/coin_interface.js"></script>
+</body>
+
+</html>
