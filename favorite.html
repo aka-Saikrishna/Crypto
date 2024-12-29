@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites</title>
+    <link rel="stylesheet" href="/favorite.css">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="nav">
+            <div class="left">
+                <a href="/index.html"><h2>Crypto Tracker</h2></a>
+            </div>
+            <div class="right">
+                <div class="btns">
+                    <a href="/index.html"><button type="button">Home</button></a>
+                    <a href=""><button type="button">Liked Coin</button></a>
+                </div>
+                <div class="search-cointainer">
+                    <input type="text" placeholder="Search here.." id="search" autocomplete="off">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <div class="dialog-box">
+                        <div class="close">
+                            <i class="fa-solid fa-xmark" id="xmark" title="close"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <main>
+            <h1 style="text-align: center; margin: 1em;">Favorite Coins</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Position</th>
+                        <th>Icon</th>
+                        <th>Name</th>
+                        <th>Price
+                            <div class="arrows">
+                                <i class="fa-solid fa-arrow-up" id="price-up"></i>
+                                <i class="fa-solid fa-arrow-down" id="price-down"></i>
+                            </div>
+                        </th>
+                        <th>24h Volume
+                            <div class="arrows">
+                                <i class="fa-solid fa-arrow-up" id="vol-up"></i>
+                                <i class="fa-solid fa-arrow-down" id="vol-down"></i>
+                            </div>
+                        </th>
+                        <th>Market Cap
+                            <div class="arrows">
+                                <i class="fa-solid fa-arrow-up" id="market-up"></i>
+                                <i class="fa-solid fa-arrow-down" id="market-down"></i>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+
+                </tbody>
+            </table>
+            <p id="no-fav" style="display: none; text-align: center;">" You haven't like any coin yet.Explore and add
+                them to the favorites.. "</p>
+            <div class="loading-overlay hidden" id="loadingOverlay">
+                <div class="loader"></div>
+            </div>
+        </main>
+    </div>
+    <script src="/favorite.js"></script>
+    <script src="https://kit.fontawesome.com/17ebe4f9e1.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
