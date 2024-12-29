@@ -12,12 +12,12 @@
     <div class="container">
         <nav class="nav">
             <div class="left">
-                <h2>Crypto Tracker</h2>
+                <a href="/index.html"><h2>Crypto Tracker</h2></a>
             </div>
             <div class="right">
                 <div class="btns">
                 <a href="/index.html"><button type="button">Home</button></a>
-                <a href="#"><button type="button">Liked Coin</button></a>
+                <a href="/favorite.html"><button type="button">Liked Coin</button></a>
                 </div>
                 <div class="search-cointainer">
                     <input type="text" placeholder="Search here.." id="search" autocomplete="off">
@@ -67,9 +67,12 @@
                 <button type="button" id="prev-button">Prev</button>
                 <button type="button" id="next-button">Next</button>
             </div>
-            <div class="shimmer-container">
+            <!-- <div class="shimmer-container">
                 <div class="shimmer">
                 </div>
+            </div> -->
+            <div class="loading-overlay hidden" id="loadingOverlay">
+                <div class="loader"></div>
             </div>
         </main>
     </div>

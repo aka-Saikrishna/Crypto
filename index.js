@@ -68,6 +68,7 @@ function updatePaginationControls() {
 }
 
 async function tableBody(page = 1) {
+  Showloader();
   const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=25&page=${page}`;
 
   try {
@@ -85,7 +86,10 @@ async function tableBody(page = 1) {
     coins = await fetchData.json();
     // console.log(coins);
   } catch (err) {
-    console.log("Error:", err.message);
+    alert(`Error: ${err.message}`);
+    window.history.back();
+  } finally {
+    hideLoader();
   }
 }
 
@@ -250,3 +254,14 @@ function handleFavClick(coinId) {
   renderCoins(coins, page,25);
 }
 // localStorage.clear();
+
+function Showloader() {
+  const loadingOverlay = document.getElementById("loadingOverlay");
+  loadingOverlay.classList.remove("hidden")
+}
+
+function hideLoader() {
+  const loadingOverlay = document.getElementById("loadingOverlay");
+  loadingOverlay.classList.add("hidden");
+
+}
