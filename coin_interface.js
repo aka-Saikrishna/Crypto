@@ -288,7 +288,20 @@ favbtn.addEventListener("click", () => {
 const favorites = localStorage.getItem("favorites");
   favbtn.textContent = favorites.includes(coinId)
     ? "Remove From Favorites"
-    : "Add To Favorite";
+  : "Add To Favorite";
+
+// Reload event
+
+let resizeTimeout;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimeout);
+
+  resizeTimeout = setTimeout(() => {
+    window.location.reload();
+  }, 500);
+});
+
+// loader
 
 function Showloader() {
   const loadingOverlay = document.getElementById("loadingOverlay");

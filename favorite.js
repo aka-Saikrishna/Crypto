@@ -146,7 +146,7 @@ async function fetchFavoriteCoins(ids) {
     coins = await response.json();
   } catch (err) {
     alert(`Error: ${err.message}`);
-    window.history.back();
+    // window.history.back();
   } finally {
     hideLoader();
   }

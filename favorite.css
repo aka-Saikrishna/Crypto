@@ -177,6 +177,64 @@ i {
     animation: spin 1s linear infinite;
 }
 
+
+@media screen and (width < 577px) {
+    .nav {
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+    }
+
+    .dialog-box {
+        font-size: 0.9em;
+        min-width: 150px;
+        max-height: 300px;
+        /* right:40%; */
+    }
+
+    table {
+        font-size: 0.8em;
+    }
+}
+
+@media screen and (width < 460px) {
+    .right {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    table {
+        font-size: 0.5em;
+    }
+
+    .dialog-box {
+        font-size: 0.6em;
+        min-width: 150px;
+        max-height: 300px;
+        right: 30%;
+    }
+
+    td,
+    th {
+        padding: 0.1em;
+    }
+
+    .img {
+        width: 12px;
+    }
+
+    .nav,
+    .right button,
+    #search ,#no-fav{
+        font-size: 0.8em;
+    }
+
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);
