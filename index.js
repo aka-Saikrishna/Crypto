@@ -21,15 +21,19 @@ let data;
 function renderCoins(data, page, itemsPerPage = 25) {
   const start = (page - 1) * itemsPerPage + 1;
   tbody.innerHTML = "";
-
+  const favorites = getFavorite();
+  console.log(favorites);
   data.forEach((coin, index) => {
-    const row = renderCoinRow(start, coin, index);
-    attachRowEvent(row,coin.id);
+    const row = renderCoinRow(start, coin, index, favorites);
+    attachRowEvent(row, coin.id);
     tbody.appendChild(row);
   });
 }
 
-function renderCoinRow(start, coin, index) {
+function renderCoinRow(start, coin, index, favorites) {
+  // console.log(coin);
+  // console.log(favorites);
+  const isFavorite = favorites.includes(coin.id);
   const row = document.createElement("tr");
   row.innerHTML = `
    <td>${start + index}</td>
@@ -38,7 +42,7 @@ function renderCoinRow(start, coin, index) {
    <td>$${coin.current_price.toLocaleString()}</td>
    <td>$${coin.total_volume.toLocaleString()}</td>
    <td>$${coin.market_cap.toLocaleString()}</td>
-   <td class="favorite-icon"><i class="fa-regular fa-star favorite-icon"></i></td>
+   <td class="favorite-icon"><i class="${isFavorite? "fa-solid":"fa-regular"} fa-star"></i></td>
    `;
   return row;
 }
@@ -54,8 +58,8 @@ function attachRowEvent(row, coinId) {
 
   row.querySelector(".favorite-icon").addEventListener("click", (event) => {
     event.stopPropagation();
-    // handleFavoriteClick(coinId);
-  })
+    handleFavClick(coinId);
+  });
 }
 
 function updatePaginationControls() {
@@ -84,13 +88,6 @@ async function tableBody(page = 1) {
     console.log("Error:", err.message);
   }
 }
-
-const initialize = async () => {
-  await tableBody(page);
-  renderCoins(coins, page);
-  updatePaginationControls();
-  fetchSearchResults();
-};
 
 async function handlePrevButton() {
   if (page > 1) {
@@ -126,6 +123,8 @@ function debounce(func, delay) {
   };
 }
 
+// Handling Drop Down
+
 function fetchSearchResults() {
   const xml = new XMLHttpRequest();
   try {
@@ -152,7 +151,6 @@ function dialogBox(data) {
 }
 
 function displayCoins(inputText, data) {
-  
   let requiredCoins = data.filter((coin) =>
     coin.name.trim().toLowerCase().includes(inputText)
   );
@@ -172,7 +170,7 @@ function displayCoins(inputText, data) {
     li.addEventListener("click", (event) => {
       event.stopPropagation();
       // console.log(selectedCoins.id);
-      const coinId = selectedCoins.id;
+      coinId = selectedCoins.id;
       window.location.href = `coin_Interface.html?id=${coinId}`;
     });
     ul.appendChild(li);
@@ -183,6 +181,16 @@ function displayCoins(inputText, data) {
 dialog.addEventListener("click", (event) => {
   event.stopPropagation();
 });
+
+const initialize = async () => {
+  await tableBody(page);
+  renderCoins(coins, page);
+  updatePaginationControls();
+  fetchSearchResults();
+};
+
+// Adding Event Listeners
+
 document.addEventListener("DOMContentLoaded", initialize);
 prevbtn.addEventListener("click", handlePrevButton);
 nextbtn.addEventListener("click", handleNextButton);
@@ -214,3 +222,31 @@ searchIcon.addEventListener(
     input.focus();
   }, 300)
 );
+
+// favorite
+
+function getFavorite() {
+  return JSON.parse(localStorage.getItem("favorites")) || [];
+}
+
+function setFavorite(favorites) {
+  return localStorage.setItem("favorites", JSON.stringify(favorites));
+}
+
+function toggleFavorite(coinId) {
+  let favorites = getFavorite();
+  if (favorites.includes(coinId)) {
+    favorites = favorites.filter((id) => id !== coinId);
+  } else {
+    favorites.push(coinId);
+  }
+  return favorites;
+}
+
+function handleFavClick(coinId) {
+  const favorites = toggleFavorite(coinId);
+  setFavorite(favorites);
+  // console.log(data)
+  renderCoins(coins, page,25);
+}
+// localStorage.clear();

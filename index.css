@@ -67,6 +67,10 @@ tr:hover td:not(.favorite-icon) {
     background-color: lightgray;
 }
 
+tr td:last-child{
+    cursor: pointer;
+}
+
 .pagination-container {
     width: fit-content;
     /* background-color: rgb(135, 215, 215); */
@@ -89,9 +93,9 @@ tr:hover td:not(.favorite-icon) {
     width: 23px;
 }
 
-.fa-regular {
+.favorite-icon {
     color: red;
-    font-size: larger;
+    font-size: large;
 }
 
 button,

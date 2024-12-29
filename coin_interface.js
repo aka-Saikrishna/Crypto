@@ -15,7 +15,7 @@ let data;
 
 const urlParams = new URLSearchParams(window.location.search);
 const coinId = urlParams.get("id");
-console.log(coinId);
+// console.log(coinId);
 
 const initialize = async () => {
   const data = await fetchDataCoin();
@@ -152,7 +152,7 @@ function displayCoinData(data) {
     coinRank.textContent = `${data.market_cap_rank}`;
     coinPrice.textContent = `$${data.market_data.current_price.usd.toLocaleString()}`;
   coinMarket.textContent = `$${data.market_data.market_cap.usd.toLocaleString()}`;
-  console.log(coinId);  
+  // console.log(coinId);  
 }
 
 
@@ -246,6 +246,45 @@ btns.forEach(btn => {
 });
 
 document.getElementById("24h").click();
+
+
+favbtn = document.querySelector("#fav-btn");
+
+function getFavorite() {
+  return JSON.parse(localStorage.getItem("favorites")) || [];
+}
+
+function setFavorite(favorites) {
+  return localStorage.setItem("favorites", JSON.stringify(favorites));
+}
+
+function toggleFavorite(coinId) {
+  let favorites = getFavorite();
+  if (favorites.includes(coinId)) {
+    favorites = favorites.filter((id) => id !== coinId);
+  } else {
+    favorites.push(coinId);
+  }
+  return favorites;
+}
+
+function handleFavClick(coinId) {
+  const favorites = toggleFavorite(coinId);
+  setFavorite(favorites);
+  console.log(favorites);
+  favbtn.textContent = favorites.includes(coinId)
+    ? "Remove From Favorites"
+    : "Add To Favorite";
+}
+
+favbtn.addEventListener("click", () => {
+  handleFavClick(coinId);
+});
+
+const favorites = localStorage.getItem("favorites");
+  favbtn.textContent = favorites.includes(coinId)
+    ? "Remove From Favorites"
+    : "Add To Favorite";
 
 
 
