@@ -125,7 +125,8 @@ searchIcon.addEventListener(
 
 const fetchDataCoin = async () => {
     url = `https://api.coingecko.com/api/v3/coins/${coinId}`;
-    try {
+  try {
+    Showloader();
         const response = await fetch(url, {
           method: "get",
           headers: {
@@ -140,7 +141,10 @@ const fetchDataCoin = async () => {
         // console.log(data);
         return data;
     } catch (err) {
-        console.log("Error: ", err.message);
+    alert(`Error: ${err.message}`);
+    window.history.back();
+  } finally {
+    hideLoader();
     }
 };
 
@@ -286,6 +290,14 @@ const favorites = localStorage.getItem("favorites");
     ? "Remove From Favorites"
     : "Add To Favorite";
 
+function Showloader() {
+  const loadingOverlay = document.getElementById("loadingOverlay");
+  loadingOverlay.classList.remove("hidden");
+}
 
+function hideLoader() {
+  const loadingOverlay = document.getElementById("loadingOverlay");
+  loadingOverlay.classList.add("hidden");
+}
 
 
